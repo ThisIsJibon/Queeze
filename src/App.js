@@ -59,6 +59,10 @@ export default function App() {
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
 
+	const reloadQuiz = () =>{
+		window.location.reload(false);
+	}
+
 	const handleAnswerOptionClick = (isCorrect) => {
 		if (isCorrect) {
 			setScore(score + 1);
@@ -75,8 +79,13 @@ export default function App() {
 		<div className='app'>
 			{showScore ? (
 				<div className='score-section'>
-					You scored {score} out of {questions.length}
+					<div >
+						You scored {score} out of {questions.length}
+					</div>
+					<button className='reload-quiz-button' onClick={() => reloadQuiz()}><span>want to play again?</span></button>
 				</div>
+				
+				
 			) : (
 				<>
 					<div className='question-section'>

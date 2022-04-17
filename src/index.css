@@ -33,8 +33,16 @@ body {
 
 .score-section {
   display: flex;
+  flex-direction: column;
   font-size: 24px;
+  justify-content: center;
   align-items: center;
+}
+
+.reload-quiz-button{
+  width: fit-content;
+  display: block;
+  justify-content: space-evenly;
 }
 
 /* QUESTION/TIMER/LEFT SECTION */
