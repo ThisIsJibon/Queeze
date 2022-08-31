@@ -89,7 +89,7 @@ button {
   border-radius: 15px;
   display: flex;
   padding: 5px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   border: 5px solid #234668;
   cursor: pointer;

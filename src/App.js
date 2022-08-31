@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 const API_URL = "https://opentdb.com/api.php?amount=4&difficulty=easy&type=multiple";
@@ -14,44 +14,51 @@ export default function App() {
 			setTQuestions(data.results);
 		})
 	},[]);
-
+	
+	function shuffleArray(array) {
+		for (let i = array.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[array[i], array[j]] = [array[j], array[i]];
+		}
+		return array
+	}
 
 	const questions = [
 		{
 			questionText: tQuestions.length > 0 ? tQuestions[0].question : 'Loading...',
-			answerOptions: [
+			answerOptions: shuffleArray([
 				{ answerText: tQuestions.length > 0 ? tQuestions[0].incorrect_answers[0] :'Loading', isCorrect: false },
 				{ answerText: tQuestions.length > 0 ? tQuestions[0].incorrect_answers[1] :'Loading', isCorrect: false },
 				{ answerText: tQuestions.length > 0 ? tQuestions[0].correct_answer :'Loading', isCorrect: true },
 				{ answerText: tQuestions.length > 0 ? tQuestions[0].incorrect_answers[2] :'Loading', isCorrect: false },
-			],
+			],)
 		},
 		{
 			questionText: 'Loading...',
-			answerOptions: [
+			answerOptions: shuffleArray([
 				{ answerText: tQuestions.length > 0 ? tQuestions[1].incorrect_answers[0] :'Loading', isCorrect: false },
 				{ answerText: tQuestions.length > 0 ? tQuestions[1].correct_answer :'Loading', isCorrect: true },
 				{ answerText: tQuestions.length > 0 ? tQuestions[1].incorrect_answers[1] :'Loading', isCorrect: false },
 				{ answerText: tQuestions.length > 0 ? tQuestions[1].incorrect_answers[2] :'Loading', isCorrect: false },
-			],
+			]),
 		},
 		{
 			questionText: 'Loading...',
-			answerOptions: [
+			answerOptions: shuffleArray([
 				{ answerText: tQuestions.length > 0 ? tQuestions[2].correct_answer :'Loading', isCorrect: true },
 				{ answerText: tQuestions.length > 0 ? tQuestions[2].incorrect_answers[0] :'Loading', isCorrect: false },
 				{ answerText: tQuestions.length > 0 ? tQuestions[2].incorrect_answers[1] :'Loading', isCorrect: false },
 				{ answerText: tQuestions.length > 0 ? tQuestions[2].incorrect_answers[2] :'Loading', isCorrect: false },
-			],
+			]),
 		},
 		{
 			questionText: 'Loading...',
-			answerOptions: [
+			answerOptions: shuffleArray([
 				{ answerText: tQuestions.length > 0 ? tQuestions[3].incorrect_answers[0] :'Loading', isCorrect: false },
 				{ answerText: tQuestions.length > 0 ? tQuestions[3].incorrect_answers[1] :'Loading', isCorrect: false },
 				{ answerText: tQuestions.length > 0 ? tQuestions[3].incorrect_answers[2] :'Loading', isCorrect: false },
 				{ answerText: tQuestions.length > 0 ? tQuestions[3].correct_answer :'Loading', isCorrect: true },
-			],
+			]),
 		},
 	];
 
@@ -63,11 +70,11 @@ export default function App() {
 		window.location.reload(false);
 	}
 
+
 	const handleAnswerOptionClick = (isCorrect) => {
 		if (isCorrect) {
 			setScore(score + 1);
-		}
-
+		} 
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
